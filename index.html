@@ -23,6 +23,7 @@
       font-family: 'Roboto', sans-serif;
       transition: background 0.3s, color 0.3s;
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
     body.light {
@@ -50,20 +51,22 @@
     #home {
       position: relative;
       overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
     }
 
-    /* New background design for other sections */
     section:not(#home) {
       position: relative;
       background: radial-gradient(circle at center, rgba(0, 168, 232, 0.1), transparent 70%);
       overflow: hidden;
+      padding: clamp(2rem, 5vw, 4rem) 1rem;
     }
 
     body.light section:not(#home) {
       background: radial-gradient(circle at center, rgba(224, 247, 250, 0.3), transparent 70%);
     }
 
-    /* Wave-like animated background */
     section:not(#home)::before {
       content: '';
       position: absolute;
@@ -87,7 +90,6 @@
       100% { background-position: 1440px 0; }
     }
 
-    /* Floating circles for added depth */
     section:not(#home)::after {
       content: '';
       position: absolute;
@@ -114,112 +116,247 @@
       position: fixed;
       width: 100%;
       height: 100%;
-      background: #1A1A1A;
-      color: #00A8E8;
+      background: #0d1117;
       display: flex;
-      align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      z-index: 2000;
-      animation: fadeOut 1s ease-out 4s forwards;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+      text-align: center;
     }
 
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
+    .loader-type {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1rem, 4vw, 1.5rem);
+    }
+
+    .typewriter-text {
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+      animation: typing 3s steps(40, end);
+      border-right: 2px solid #FFD700;
+      color: #00A8E8;
+    }
+
+    .typewriter-text .highlight {
+      color: #FFD700;
+    }
+
+    .header-typewriter-text {
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+      position: relative;
+      padding-right: 0;
+      margin-right: 0;
+      font-size: clamp(1rem, 3vw, 1.2rem);
+    }
+
+    .header-typewriter-text .part1 {
+      color: #00A8E8;
+    }
+
+    .header-typewriter-text .part2 {
+      color: #FFD700;
+    }
+
+    body.light .header-typewriter-text .part1 {
+      color: #0288D1;
+    }
+
+    body.light .header-typewriter-text .part2 {
+      color: #FFB300;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .pulse-text {
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        text-shadow: 0 0 5px #00A8E8, 0 0 10px #00A8E8;
+      }
+      50% {
+        text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+      }
+    }
+
+    .glow-icon-inline {
+      color: #FFD700;
+      text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 20px #FFD700;
+      animation: glow-pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% {
+        text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 20px #FFD700;
+      }
+      50% {
+        text-shadow: 0 0 10px #FFF176, 0 0 20px #FFD700, 0 0 30px #FFD700;
+      }
+    }
+
+    .icon {
+      color: #FFD700;
+      margin-right: 0.5rem;
+      font-size: clamp(1rem, 3vw, 1.5rem);
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 clamp(1rem, 3vw, 2rem);
     }
 
     header {
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: clamp(0.75rem, 2.5vw, 1.25rem) 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
       position: sticky;
       top: 0;
-      background: inherit;
       z-index: 1000;
-      backdrop-filter: blur(5px);
     }
 
-    header h1 {
+    body.light header {
+      background: rgba(248, 250, 252, 0.8);
+    }
+
+    .nav-container {
+      width: 90%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      gap: clamp(0.5rem, 2vw, 1rem);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.5rem, 2vw, 1rem);
+      width: 100%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.5rem;
+    }
+
+    body.light .logo-container {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .logo-type {
       font-family: 'Poppins', sans-serif;
-      font-size: 2rem;
-      color: #00A8E8;
+      font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-align: left;
+      justify-content: flex-start;
+      flex: 1;
     }
 
     nav {
       display: flex;
+      flex-direction: row;
+      gap: 10px;
+      position: relative;
       align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     nav a {
-      margin-left: 1.5rem;
+      position: relative;
       text-decoration: none;
       color: inherit;
+      font-size: clamp(0.95rem, 2.8vw, 1.1rem);
       font-weight: 500;
-      font-size: 1rem;
+      padding: 10px 20px;
+      z-index: 2;
       transition: color 0.3s;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    nav a:last-child {
+      border-right: none;
+    }
+
+    body.light nav a {
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     nav a:hover, nav a.active {
       color: #FFD700;
     }
 
+    .bubble {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+      backdrop-filter: blur(10px);
+      z-index: 1;
+      transition: all 0.4s ease;
+      pointer-events: none;
+    }
+
+    body.light .bubble {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
     .toggle-theme {
       cursor: pointer;
-      font-size: 1rem;
+      font-size: clamp(0.95rem, 2.8vw, 1.1rem);
       border: 1px solid #00A8E8;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      background: transparent;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      background: rgba(0, 168, 232, 0.1);
       color: inherit;
-      transition: background 0.3s, color 0.3s;
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+      min-width: 90px;
+      text-align: center;
+    }
+
+    body.light .toggle-theme {
+      border-color: #0288D1;
+      background: rgba(224, 247, 250, 0.2);
     }
 
     .toggle-theme:hover {
       background: #00A8E8;
       color: #F8FAFC;
+      transform: scale(1.05);
+    }
+
+    body.light .toggle-theme:hover {
+      background: #0288D1;
+      color: #1A1A1A;
     }
 
     .hamburger {
       display: none;
-      font-size: 1.5rem;
+      font-size: clamp(1.4rem, 4.5vw, 1.8rem);
       cursor: pointer;
       color: inherit;
+      transition: transform 0.3s;
+      padding: 0.5rem;
+    }
+
+    .hamburger:hover {
+      transform: rotate(90deg);
     }
 
     section {
-      padding: 5rem 2rem;
       position: relative;
-    }
-
-    /* Updated section divider with pulsing gradient */
-    section::before {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 4px;
-      background: linear-gradient(90deg, #00A8E8, #FFD700, #00A8E8);
-      background-size: 200% 100%;
-      margin: 0 auto 2rem;
-      opacity: 0;
-      animation: pulse 3s ease-in-out infinite;
-      transition: opacity 0.5s ease;
-    }
-
-    section.visible::before {
-      opacity: 1;
-    }
-
-    @keyframes pulse {
-      0% { background-position: 0% 0; }
-      50% { background-position: 100% 0; }
-      100% { background-position: 0% 0; }
     }
 
     .home, .about, #skills {
@@ -228,12 +365,12 @@
 
     .home h2 {
       font-family: 'Poppins', sans-serif;
-      font-size: 2.25rem;
+      font-size: clamp(1.5rem, 5vw, 2.25rem);
       margin-bottom: 1rem;
     }
 
     .home p {
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 3vw, 1.2rem);
       color: #666;
       min-height: 1.5em;
     }
@@ -247,11 +384,11 @@
     }
 
     .home img {
-      width: 180px;
-      height: 180px;
+      width: clamp(120px, 25vw, 180px);
+      height: clamp(120px, 25vw, 180px);
       border-radius: 50%;
       object-fit: cover;
-      margin: 1.5rem auto;
+      margin: clamp(1rem, 3vw, 1.5rem) auto;
       padding: 5px;
       background: linear-gradient(45deg, #00A8E8, #FFD700);
       transition: transform 0.3s ease;
@@ -263,14 +400,14 @@
 
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 45vw, 300px), 1fr));
+      gap: clamp(1rem, 3vw, 1.5rem);
     }
 
     .project-card {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 1.5rem;
+      padding: clamp(1rem, 3vw, 1.5rem);
       border-radius: 15px;
       backdrop-filter: blur(10px);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -289,15 +426,37 @@
 
     .project-card img {
       width: 100%;
-      height: 150px;
+      height: clamp(120px, 20vw, 150px);
       object-fit: cover;
       border-radius: 8px;
       margin-bottom: 1rem;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card img:hover {
+      opacity: 0.9;
+    }
+
+    .project-card h3 {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+    }
+
+    .project-card p {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+
+    .project-card a {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
     }
 
     .filter-buttons {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: clamp(1rem, 3vw, 2rem);
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .filter-buttons button {
@@ -306,10 +465,11 @@
       backdrop-filter: blur(5px);
       color: inherit;
       padding: 0.5rem 1rem;
-      margin: 0 0.5rem;
       border-radius: 5px;
       cursor: pointer;
       transition: background 0.3s;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      min-width: 80px;
     }
 
     body.light .filter-buttons button {
@@ -324,16 +484,16 @@
 
     #skills .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 40vw, 200px), 1fr));
+      gap: clamp(0.8rem, 2vw, 1rem);
       max-width: 800px;
-      margin: 2rem auto;
+      margin: clamp(1rem, 3vw, 2rem) auto;
     }
 
     .skill-item {
       text-align: left;
       background: rgba(255, 255, 255, 0.05);
-      padding: 1rem;
+      padding: clamp(0.8rem, 2vw, 1rem);
       border-radius: 10px;
       backdrop-filter: blur(5px);
     }
@@ -363,27 +523,28 @@
     }
 
     footer {
-      padding: 3rem 1rem;
-      font-size: 0.9rem;
+      padding: clamp(2rem, 5vw, 3rem) 1rem;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
       background: rgba(0, 0, 0, 0.1);
     }
 
     .footer-content {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: clamp(1rem, 3vw, 2rem);
       margin-bottom: 1.5rem;
     }
 
-    .footer-links, .footer-newsletter {
+    .footer-links {
       flex: 1;
-      min-width: 200px;
+      min-width: clamp(180px, 40vw, 200px);
+      text-align: center;
     }
 
-    .footer-links h3, .footer-newsletter h3 {
+    .footer-links h3 {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 3vw, 1.2rem);
       margin-bottom: 1rem;
       color: #00A8E8;
     }
@@ -394,28 +555,11 @@
       text-decoration: none;
       margin-bottom: 0.5rem;
       transition: color 0.3s;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
     }
 
     .footer-links a:hover {
       color: #FFD700;
-    }
-
-    .footer-newsletter form {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .footer-newsletter input {
-      flex: 1;
-      padding: 0.5rem;
-      border: 1px solid #00A8E8;
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.05);
-      color: inherit;
-    }
-
-    .footer-newsletter button {
-      padding: 0.5rem 1rem;
     }
 
     footer p {
@@ -424,20 +568,21 @@
 
     form {
       max-width: 600px;
-      margin: 2rem auto;
+      margin: clamp(1rem, 3vw, 2rem) auto;
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
 
     input, textarea {
-      padding: 0.75rem;
+      padding: clamp(0.5rem, 2vw, 0.75rem);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 5px;
-      font-size: 1rem;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(5px);
       color: inherit;
+      min-height: 44px;
     }
 
     body.light input, body.light textarea {
@@ -446,15 +591,15 @@
     }
 
     button {
-      padding: 0.75rem;
+      padding: clamp(0.5rem, 2vw, 0.75rem);
       border: none;
       border-radius: 5px;
-      font-size: 1rem;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
       background: #00A8E8;
       color: #F8FAFC;
       cursor: pointer;
       transition: background 0.3s;
-      min-height: 48px;
+      min-height: 44px;
       position: relative;
     }
 
@@ -486,23 +631,23 @@
     #form-message {
       text-align: center;
       margin-top: 1rem;
-      font-size: 0.9rem;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
     }
 
     #back-to-top {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: clamp(1rem, 3vw, 2rem);
+      right: clamp(1rem, 3vw, 2rem);
       background: rgba(0, 168, 232, 0.2);
       backdrop-filter: blur(5px);
       color: #F8FAFC;
       border: none;
       border-radius: 50%;
-      width: 48px;
-      height: 48px;
+      width: clamp(40px, 10vw, 48px);
+      height: clamp(40px, 10vw, 48px);
       display: none;
       cursor: pointer;
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 3vw, 1.2rem);
       transition: background 0.3s;
     }
 
@@ -518,10 +663,75 @@
 
     .social-link {
       transition: transform 0.3s ease;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
     }
 
     .social-link:hover {
       transform: scale(1.1) rotate(5deg);
+    }
+
+    .social-icon {
+      width: clamp(16px, 2vw, 20px);
+      height: clamp(16px, 2vw, 20px);
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+
+    .contact-info {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+
+    /* Modal styles for image preview */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      overflow: auto;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 168, 232, 0.3);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #F8FAFC;
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    body.light .modal-close {
+      color: #1A1A1A;
+    }
+
+    .modal-close:hover {
+      color: #FFD700;
+    }
+
+    @media (max-width: 1024px) {
+      .projects {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
     }
 
     @media (max-width: 768px) {
@@ -533,54 +743,181 @@
         width: 100%;
         background: inherit;
         flex-direction: column;
-        padding: 1rem;
+        padding: clamp(0.75rem, 2.5vw, 1.25rem);
+        backdrop-filter: blur(8px);
+        z-index: 999;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
       }
 
       nav.active {
         display: flex;
       }
 
-      nav a, .toggle-theme {
-        margin: 0.5rem 0;
+      nav a {
+        margin: 0.6rem 0;
+        padding: 0.6rem;
+        width: 100%;
+        text-align: center;
+        border-radius: 5px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      body.light nav a {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      nav a:last-child {
+        border-bottom: none;
+      }
+
+      .bubble {
+        display: none;
       }
 
       .hamburger {
         display: block;
       }
 
-      section {
-        padding: 3rem 1rem;
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .home img {
-        width: 150px;
-        height: 150px;
+      .logo-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .logo-type {
+        flex: 1;
+        text-align: left;
+        justify-content: flex-start;
+      }
+
+      .toggle-theme {
+        margin-left: 0;
+        border-bottom: none;
+      }
+
+      .home {
+        padding: clamp(2rem, 5vw, 3rem) 1rem;
       }
 
       .footer-content {
         flex-direction: column;
         align-items: center;
       }
+
+      .modal-content {
+        max-width: 95%;
+        max-height: 70vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-type {
+        font-size: clamp(1.2rem, 5.5vw, 1.8rem);
+      }
+
+      .icon {
+        font-size: clamp(1rem, 4.5vw, 1.4rem);
+      }
+
+      .home h2 {
+        font-size: clamp(1.2rem, 6vw, 1.8rem);
+      }
+
+      .home p {
+        font-size: clamp(0.9rem, 4vw, 1rem);
+      }
+
+      .home img {
+        width: clamp(100px, 30vw, 150px);
+        height: clamp(100px, 30vw, 150px);
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card img {
+        height: clamp(100px, 25vw, 120px);
+      }
+
+      .filter-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .filter-buttons button {
+        width: 100%;
+        max-width: 200px;
+      }
+
+      input, textarea, button {
+        font-size: clamp(0.8rem, 4vw, 0.9rem);
+      }
+
+      .contact-info {
+        font-size: clamp(0.8rem, 4vw, 0.9rem);
+      }
+
+      .footer-links a {
+        font-size: clamp(0.8rem, 4vw, 0.9rem);
+      }
+
+      .modal-close {
+        top: 15px;
+        right: 20px;
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
+      }
     }
   </style>
 </head>
 <body class="dark">
-  <div id="loader">🚀 Entering Saood's Portfolio...</div>
+  <div id="loader">
+    <h1 class="loader-type pulse-text">
+      <span class="glow-icon-inline">⚡</span>
+      <span class="typewriter-text"></span><span class="cursor">|</span>
+    </h1>
+  </div>
+
+  <!-- Modal for image preview -->
+  <div id="image-modal" class="modal">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <img class="modal-content" id="modal-image" alt="Profile Picture">
+  </div>
+
+  <audio id="type-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_655e746a96.mp3" preload="auto"></audio>
 
   <header role="banner">
-    <div class="container">
-      <h1>Khan Saood</h1>
-      <span class="hamburger" onclick="toggleNav()">☰</span>
-      <nav role="navigation">
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#contact">Contact</a>
+    <div class="nav-container">
+      <div class="logo-container">
+        <h1 class="logo-type" aria-label="Animated logo with typewriter effect: Khan Saood, Lifelong Learner">
+          <span class="icon">💻</span>
+          <span class="header-typewriter-text"><span class="part1"></span><span class="part2"></span></span><span class="cursor">|</span>
+        </h1>
         <button class="toggle-theme" onclick="toggleTheme()" tabindex="0">🌓 Theme</button>
+        <span class="hamburger" onclick="toggleNav()">☰</span>
+      </div>
+      <nav role="navigation">
+        <div class="bubble" id="bubble"></div>
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#certifications" class="nav-link">Certifications</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
     </div>
   </header>
@@ -590,8 +927,8 @@
       <div id="home-particles"></div>
       <div class="container">
         <h2>Hi, I’m Khan Saood Ahmed 👨‍💻</h2>
-        <p><span id="typed-text"></span><span class="cursor">|</span></p>
-        <img src="https://i.ibb.co/BVn3ZBMS/Khan-Saood.jpg" alt="Khan Saood Ahmed" loading="lazy" />
+        <p><span id="title-text"></span><span class="cursor">|</span></p>
+        <img src="https://i.ibb.co/BVn3ZBMS/Khan-Saood.jpg" alt="Khan Saood Ahmed" loading="lazy" class="profile-pic" />
       </div>
     </section>
 
@@ -639,19 +976,19 @@
         </div>
         <div class="projects">
           <div class="project-card" data-category="web">
-            <img src="https://via.placeholder.com/300x150.webp" alt="Masjid Website Preview" loading="lazy">
+            <img src="https://i.ibb.co/BKwskMMN/Screenshot-2025-06-16-024700.png" alt="Masjid Website Preview" loading="lazy" onclick="openModal(this.src, this.alt)">
             <h3>Masjid Website</h3>
             <p>Beautiful Masjid-e-Ayesha site with countdown, greeting, and confetti.</p>
             <a href="https://github.com/khansaood11/Masjid" target="_blank">GitHub Repo</a>
           </div>
           <div class="project-card" data-category="web">
-            <img src="https://via.placeholder.com/300x150.webp" alt="Farhan Printing Press Preview" loading="lazy">
+            <img src="https://i.ibb.co/5xwBQY3B/Screenshot-2025-06-16-024829.png" alt="Farhan Printing Press Preview" loading="lazy" onclick="openModal(this.src, this.alt)">
             <h3>Farhan Printing Press</h3>
             <p>Print business website inspired by Arrow Print Club design.</p>
             <a href="https://github.com/khansaood11/farhan-printing-press" target="_blank">GitHub Repo</a>
           </div>
           <div class="project-card" data-category="web">
-            <img src="https://via.placeholder.com/300x150.webp" alt="Markaz Website Preview" loading="lazy">
+            <img src="https://i.ibb.co/bRXW2G2p/Screenshot-2025-06-16-024646.png" alt="Markaz Website Preview" loading="lazy" onclick="openModal(this.src, this.alt)">
             <h3>Markaz Website</h3>
             <p>Islamic organization project with elegant structure and layout.</p>
             <a href="https://github.com/khansaood11/markaz" target="_blank">GitHub Repo</a>
@@ -699,14 +1036,6 @@
       </div>
     </section>
 
-    <section id="resume" data-aos="fade-up">
-      <div class="container">
-        <h2>Resume</h2>
-        <p>Download my resume to learn more about my qualifications.</p>
-        <a href="/path/to/resume.pdf" download class="button">Download Resume</a>
-      </div>
-    </section>
-
     <section id="contact" data-aos="fade-up">
       <div class="container">
         <h2>Contact Me</h2>
@@ -718,11 +1047,32 @@
           <button type="submit" id="submit-btn">Send Message <span class="spinner" style="display:none;"></span></button>
         </form>
         <p id="form-message"></p>
-        <p style="text-align: center; margin-top: 1rem;">
-          📞 9499623940 | 📧 khansaood7860@gmail.com<br/>
-          <a href="https://www.linkedin.com/in/khansaood" target="_blank" class="social-link">🔗 LinkedIn</a> | 
-          <a href="https://www.instagram.com/khansaood_" target="_blank" class="social-link">📸 Instagram</a>
-        </p>
+        <div class="contact-info">
+          <div class="contact-card">
+            <div class="contact-item">
+              <span class="contact-icon">📞</span>
+              <a href="tel:+919499623940" class="contact-link">+91 94996 23940</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📧</span>
+              <a href="mailto:khansaood7860@gmail.com" class="contact-link">khansaood7860@gmail.com</a>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/khansaood" target="_blank" class="social-btn" aria-label="LinkedIn Profile">
+              <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-1.337-.03-3.063-1.867-3.063-1.872 0-2.159 1.462-2.159 2.972v5.695h-3v-11h2.873v1.485h.04c.399-.754 1.373-1.545 2.826-1.545 3.021 0 3.578 1.987 3.578 4.573v6.487z"/>
+              </svg>
+              LinkedIn
+            </a>
+            <a href="https://www.instagram.com/khansaood_" target="_blank" class="social-btn" aria-label="Instagram Profile">
+              <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 4.441c1.475 0 1.652.008 2.231.032.538.022.831.114 1.025.189.257.1.439.219.63.406.188.19.307.372.406.63.075.194.167.487.189 1.025.024.579.032.756.032 2.231s-.008 1.652-.032 2.231c-.022.538-.114.831-.189 1.025-.1.257-.219.439-.406.63-.19.188-.372.307-.63.406-.194.075-.487.167-1.025.189-.579.024-.756.032-2.231.032s-1.652-.008-2.231-.032c-.538-.022-.831-.114-1.025-.189-.257-.1-.439-.219-.63-.406-.188-.19-.307-.372-.406-.63-.075-.194-.167-.487-.189-1.025-.024-.579-.032-.756-.032-2.231s.008-1.652.032-2.231c.022-.538.114-.831.189-1.025.1-.257.219-.439.406-.63.19-.188.372-.307.63-.406.194-.075.487-.167 1.025-.189.579-.024.756-.032 2.231-.032zm0-1.441c-1.504 0-1.692.009-2.282.034-.59.025-.993.12-1.346.257-.363.141-.67.33-.977.637-.307.307-.496.614-.637.977-.137.353-.232.756-.257 1.346-.025.59-.034.778-.034 2.282s.009 1.692.034 2.282c.025.59.12.993.257 1.346.141.363.33.67.637.977.307.307.614.496.977.637.353.137.756.232 1.346.257.59.025.778.034 2.282.034s1.692-.009 2.282-.034c-.025-.59-.12-.993-.257-1.346-.141-.363-.33-.67-.637-.977-.307-.307-.614-.496-.977-.637-.353-.137-.756-.232-1.346-.257-.59-.025-.778-.034-2.282-.034zm0 5.488c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.015-4.5-4.5-4.5zm0 7.5c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3zm4.691-9.194c-.582 0-1.054.472-1.054 1.054s.472 1.054 1.054 1.054 1.054-.472 1.054-1.054-.472-1.054-1.054-1.054z"/>
+              </svg>
+              Instagram
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -734,14 +1084,6 @@
           <h3>Quick Links</h3>
           <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
-          <a href="#resume">Resume</a>
-        </div>
-        <div class="footer-newsletter">
-          <h3>Stay Updated</h3>
-          <form id="newsletter-form">
-            <input type="email" name="email" placeholder="Your Email" aria-label="Your Email for Newsletter" required />
-            <button type="submit">Subscribe</button>
-          </form>
         </div>
       </div>
       <p>© 2025 Khan Saood Ahmed. All Rights Reserved.</p>
@@ -753,54 +1095,198 @@
   <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
   <script>
-    // Wait for the DOM to be fully loaded before running scripts
     document.addEventListener('DOMContentLoaded', function() {
-      // Initialize AOS only if the library is loaded
       if (typeof AOS !== 'undefined') {
-        AOS.init();
+        AOS.init({
+          duration: 800,
+          once: true,
+          offset: 50
+        });
         console.log("AOS initialized successfully.");
       } else {
-        console.error("AOS library not loaded. Please check the script source.");
+        console.error("AOS library not loaded.");
       }
 
-      // Theme loading and loader
+      const loaderText = "Booting up Khan Saood | Exploring Digital Frontiers...";
+      const highlightFrom = loaderText.indexOf('|');
+      const typewriterText = document.querySelector('.typewriter-text');
+      const audio = document.getElementById('type-sound');
+      let loaderIndex = 0;
+      const typeSpeed = 50;
+
+      function typeLoader() {
+        if (loaderIndex < loaderText.length) {
+          const currentChar = loaderText.charAt(loaderIndex);
+          if (loaderIndex === highlightFrom) {
+            typewriterText.innerHTML += '<span class="highlight">';
+          }
+          if (highlightFrom === -1 || loaderIndex <= highlightFrom) {
+            typewriterText.innerHTML += currentChar;
+          } else {
+            if (typewriterText.lastChild && typewriterText.lastChild.nodeType === 3) {
+              typewriterText.lastChild.textContent += currentChar;
+            } else {
+              typewriterText.innerHTML += currentChar;
+            }
+          }
+          if (loaderIndex === loaderText.length - 1 && highlightFrom !== -1) {
+            typewriterText.innerHTML += '</span>';
+          }
+          loaderIndex++;
+          if (!audio.paused) audio.currentTime = 0;
+          audio.play();
+          setTimeout(typeLoader, typeSpeed);
+        }
+      }
+      typeLoader();
+
+      const headerText = "Khan Saood |Lifelong Learner";
+      const headerTypewriter = document.querySelector('.header-typewriter-text');
+      const part1Span = headerTypewriter.querySelector('.part1');
+      const part2Span = headerTypewriter.querySelector('.part2');
+      let headerCharIndex = 0;
+      let isDeleting = false;
+      const headerTypeSpeed = 50;
+      const pauseDuration = 1500;
+
+      function typeHeader() {
+        const part1Text = "Khan Saood ";
+        const separator = "|";
+        const part2Text = "Lifelong Learner";
+        const fullText = part1Text + separator + part2Text;
+
+        if (isDeleting) {
+          headerCharIndex--;
+          if (headerCharIndex < 0) {
+            isDeleting = false;
+            part1Span.textContent = "";
+            part2Span.textContent = "";
+            setTimeout(typeHeader, 500);
+            return;
+          }
+        } else {
+          headerCharIndex++;
+          if (headerCharIndex === fullText.length) {
+            isDeleting = true;
+            setTimeout(typeHeader, pauseDuration);
+            return;
+          }
+        }
+
+        if (headerCharIndex <= part1Text.length) {
+          part1Span.textContent = fullText.substring(0, Math.min(headerCharIndex, part1Text.length));
+          part2Span.textContent = "";
+        } else if (headerCharIndex <= part1Text.length + separator.length) {
+          part1Span.textContent = part1Text;
+          part2Span.textContent = fullText.substring(part1Text.length, Math.min(headerCharIndex, part1Text.length + separator.length));
+        } else {
+          part1Span.textContent = part1Text;
+          part2Span.textContent = fullText.substring(part1Text.length, headerCharIndex);
+        }
+
+        setTimeout(typeHeader, headerTypeSpeed);
+      }
+
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        typeHeader();
+      }, 4000);
+
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {
         document.body.classList.remove('light', 'dark');
         document.body.classList.add(savedTheme);
       }
-      setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-      }, 4000);
 
-      // Typing effect for home section
-      const text = "Ex-SOC Analyst @ TechOwl | Cybersecurity & Web Dev Enthusiast";
-      let index = 0;
-      const speed = 50;
-      const typedText = document.getElementById('typed-text');
-      function type() {
-        if (index < text.length) {
-          typedText.textContent += text.charAt(index);
-          index++;
-          setTimeout(type, speed);
+      const titles = [
+        "Web Developer",
+        "Cybersecurity Enthusiast",
+        "Tech Explorer",
+        "SOC Analyst"
+      ];
+      let titleIndex = 0;
+      let charIndex = 0;
+      let isDeletingTitle = false;
+      const titleText = document.getElementById('title-text');
+      const titleSpeed = 50;
+      const pauseDurationTitle = 1500;
+
+      function typeTitle() {
+        const currentTitle = titles[titleIndex];
+        if (isDeletingTitle) {
+          titleText.textContent = currentTitle.substring(0, charIndex);
+          charIndex--;
+          if (charIndex < 0) {
+            isDeletingTitle = false;
+            titleIndex = (titleIndex + 1) % titles.length;
+            setTimeout(typeTitle, 500);
+            return;
+          }
+        } else {
+          titleText.textContent = currentTitle.substring(0, charIndex + 1);
+          charIndex++;
+          if (charIndex === currentTitle.length) {
+            isDeletingTitle = true;
+            setTimeout(typeTitle, pauseDurationTitle);
+            return;
+          }
         }
+        setTimeout(typeTitle, titleSpeed);
       }
-      type();
+      setTimeout(typeTitle, 4500);
 
-      // Initialize tsParticles only for the Home section
       if (typeof tsParticles === 'undefined') {
-        console.error("tsParticles not loaded. Please check the script source.");
+        console.error("tsParticles not loaded.");
       } else {
         console.log("tsParticles loaded successfully. Initializing particles for Home section...");
         initializeHomeParticles();
       }
 
-      // Add visibility class to sections for divider animation
+      const links = document.querySelectorAll('.nav-link');
+      const bubble = document.getElementById('bubble');
+
+      function moveBubble(target) {
+        const rect = target.getBoundingClientRect();
+        const navRect = target.parentElement.getBoundingClientRect();
+        bubble.style.width = `${rect.width}px`;
+        bubble.style.height = `${rect.height}px`;
+        bubble.style.left = `${rect.left - navRect.left}px`;
+        bubble.style.top = `${rect.top - navRect.top}px`;
+      }
+
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+          moveBubble(link);
+          const nav = document.querySelector('nav');
+          if (nav.classList.contains('active')) {
+            nav.classList.remove('active');
+          }
+          const sectionId = link.getAttribute('href').slice(1);
+          document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      window.addEventListener('load', () => {
+        const active = document.querySelector('.nav-link.active');
+        moveBubble(active);
+      });
+
       const sections = document.querySelectorAll('section');
       const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href').slice(1) === entry.target.id) {
+                link.classList.add('active');
+                moveBubble(link);
+              }
+            });
           }
         });
       }, { threshold: 0.1 });
@@ -808,6 +1294,25 @@
       sections.forEach(section => {
         sectionObserver.observe(section);
       });
+
+      // Long press detection for profile picture
+      const profilePic = document.querySelector('.profile-pic');
+      let pressTimer;
+      function startPress(e) {
+        e.preventDefault();
+        pressTimer = setTimeout(() => {
+          openModal(profilePic.src, profilePic.alt);
+        }, 500);
+      }
+      function cancelPress() {
+        clearTimeout(pressTimer);
+      }
+      profilePic.addEventListener('touchstart', startPress);
+      profilePic.addEventListener('touchend', cancelPress);
+      profilePic.addEventListener('touchcancel', cancelPress);
+      profilePic.addEventListener('mousedown', startPress);
+      profilePic.addEventListener('mouseup', cancelPress);
+      profilePic.addEventListener('mouseleave', cancelPress);
     });
 
     function toggleTheme() {
@@ -815,7 +1320,6 @@
       document.body.classList.toggle('dark');
       const currentTheme = document.body.classList.contains('light') ? 'light' : 'dark';
       localStorage.setItem('theme', currentTheme);
-      // Reinitialize particles for the Home section on theme change
       setTimeout(initializeHomeParticles, 100);
     }
 
@@ -842,23 +1346,6 @@
     window.addEventListener('scroll', () => {
       const backToTop = document.getElementById('back-to-top');
       backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-
-      // Highlight active nav link
-      const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('nav a');
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (window.scrollY >= sectionTop - 60) {
-          current = section.getAttribute('id');
-        }
-      });
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
-          link.classList.add('active');
-        }
-      });
     });
 
     const skillsObserver = new IntersectionObserver((entries) => {
@@ -905,17 +1392,11 @@
       }
     });
 
-    document.getElementById('newsletter-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Thank you for subscribing! (This is a placeholder - integrate with a real newsletter service.)');
-      e.target.reset();
-    });
-
     function initializeHomeParticles() {
       const isLightMode = document.body.classList.contains('light');
       tsParticles.load("home-particles", {
         particles: {
-          number: { value: 120 },
+          number: { value: window.innerWidth < 768 ? 60 : 120 },
           size: { value: 3 },
           color: { value: isLightMode ? "#666666" : "#00A8E8" },
           links: {
@@ -937,7 +1418,7 @@
         interactivity: {
           detectsOn: "canvas",
           events: {
-            onHover: { enable: true, mode: "attract" },
+            onHover: { enable: window.innerWidth >= 768, mode: "attract" },
             onClick: { enable: true, mode: "push" }
           },
           modes: {
@@ -954,6 +1435,36 @@
       console.log("tsParticles initialized in Home section with", isLightMode ? "light" : "dark", "theme settings.");
       console.log("Hover interactivity enabled with 'attract' mode, distance: 200, speed: 8");
     }
+
+    // Modal functions for image preview
+    function openModal(src, alt) {
+      const modal = document.getElementById('image-modal');
+      const modalImg = document.getElementById('modal-image');
+      modal.style.display = 'flex';
+      modalImg.src = src;
+      modalImg.alt = alt;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('image-modal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside the image
+    document.getElementById('image-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
   </script>
 </body>
 </html>
