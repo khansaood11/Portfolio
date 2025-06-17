@@ -216,15 +216,33 @@
 
     header {
       padding: clamp(0.75rem, 2.5vw, 1.25rem) 0;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
       position: sticky;
       top: 0;
       z-index: 1000;
+      /* Glassmorphism effect */
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 168, 232, 0.1));
+      backdrop-filter: blur(15px); /* Increased blur for frosted glass effect */
+      -webkit-backdrop-filter: blur(15px); /* For Safari support */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+      border-radius: 0 0 15px 15px; /* Rounded bottom corners */
+      transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
     body.light header {
-      background: rgba(248, 250, 252, 0.8);
+      background: linear-gradient(135deg, rgba(248, 250, 252, 0.4), rgba(224, 247, 250, 0.3));
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    header:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(0, 168, 232, 0.15));
+      box-shadow: 0 6px 40px rgba(0, 168, 232, 0.2); /* Enhanced shadow on hover */
+    }
+
+    body.light header:hover {
+      background: linear-gradient(135deg, rgba(248, 250, 252, 0.5), rgba(224, 247, 250, 0.4));
+      box-shadow: 0 6px 40px rgba(224, 247, 250, 0.3);
     }
 
     .nav-container {
@@ -232,7 +250,7 @@
       margin: auto;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       position: relative;
       gap: clamp(0.5rem, 2vw, 1rem);
     }
@@ -383,19 +401,44 @@
       50% { opacity: 0; }
     }
 
+    .profile-pic-wrapper {
+      display: inline-block;
+      animation: float-profile 3s ease-in-out infinite;
+      margin: clamp(1rem, 3vw, 1.5rem) auto;
+    }
+
+    @keyframes float-profile {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
     .home img {
-      width: clamp(120px, 25vw, 180px);
-      height: clamp(120px, 25vw, 180px);
+      width: clamp(150px, 30vw, 220px);
+      height: clamp(150px, 30vw, 220px);
       border-radius: 50%;
       object-fit: cover;
-      margin: clamp(1rem, 3vw, 1.5rem) auto;
       padding: 5px;
       background: linear-gradient(45deg, #00A8E8, #FFD700);
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: glow-profile 2s ease-in-out infinite;
+    }
+
+    @keyframes glow-profile {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 168, 232, 0.5), 0 0 20px rgba(255, 215, 0, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(0, 168, 232, 0.8), 0 0 30px rgba(255, 215, 0, 0.8);
+      }
     }
 
     .home img:hover {
-      transform: scale(1.05);
+      transform: scale(1.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
     .projects {
@@ -1026,8 +1069,8 @@
       }
 
       .home img {
-        width: clamp(100px, 30vw, 150px);
-        height: clamp(100px, 30vw, 150px);
+        width: clamp(120px, 35vw, 180px);
+        height: clamp(120px, 35vw, 180px);
       }
 
       .projects {
@@ -1127,7 +1170,9 @@
       <div class="container">
         <h2>Hi, I’m Khan Saood Ahmed 👨‍💻</h2>
         <p><span id="title-text"></span><span class="cursor">|</span></p>
-        <img src="https://i.ibb.co/BVn3ZBMS/Khan-Saood.jpg" alt="Khan Saood Ahmed" loading="lazy" class="profile-pic" />
+        <div class="profile-pic-wrapper">
+          <img src="https://i.ibb.co/BVn3ZBMS/Khan-Saood.jpg" alt="Khan Saood Ahmed" loading="lazy" class="profile-pic" />
+        </div>
       </div>
     </section>
 
@@ -1329,8 +1374,23 @@
       const highlightFrom = loaderText.indexOf('|');
       const typewriterText = document.querySelector('.typewriter-text');
       const audio = document.getElementById('type-sound');
+      let hasInteracted = false;
       let loaderIndex = 0;
       const typeSpeed = 50;
+
+      function enableAudio() {
+        hasInteracted = true;
+        audio.play().catch(err => {
+          console.log("Audio play still blocked:", err);
+        });
+        document.removeEventListener('click', enableAudio);
+        document.removeEventListener('touchstart', enableAudio);
+        document.removeEventListener('scroll', enableAudio);
+      }
+
+      document.addEventListener('click', enableAudio);
+      document.addEventListener('touchstart', enableAudio);
+      document.addEventListener('scroll', enableAudio);
 
       function typeLoader() {
         if (loaderIndex < loaderText.length) {
@@ -1351,8 +1411,12 @@
             typewriterText.innerHTML += '</span>';
           }
           loaderIndex++;
-          if (!audio.paused) audio.currentTime = 0;
-          audio.play();
+          if (hasInteracted) {
+            if (!audio.paused) audio.currentTime = 0;
+            audio.play().catch(err => {
+              console.log("Audio play failed:", err);
+            });
+          }
           setTimeout(typeLoader, typeSpeed);
         }
       }
@@ -1513,7 +1577,6 @@
         sectionObserver.observe(section);
       });
 
-      // Long press detection for profile picture
       const profilePic = document.querySelector('.profile-pic');
       let pressTimer;
       function startPress(e) {
@@ -1654,7 +1717,6 @@
       console.log("Hover interactivity enabled with 'attract' mode, distance: 200, speed: 8");
     }
 
-    // Modal functions for image preview
     function openModal(src, alt) {
       const modal = document.getElementById('image-modal');
       const modalImg = document.getElementById('modal-image');
@@ -1670,14 +1732,12 @@
       document.body.style.overflow = 'auto';
     }
 
-    // Close modal when clicking outside the image
     document.getElementById('image-modal').addEventListener('click', function(e) {
       if (e.target === this) {
         closeModal();
       }
     });
 
-    // Close modal with Escape key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         closeModal();
